@@ -28,6 +28,6 @@ Otherwise, you should follow OpenWebUI's guide [here and use it with a CPU inste
 - [Ollama Github](https://github.com/chroma-core/chroma "Get up and running with large language models.")
 
 
-#### Feel free to reach out, if any questions!
+## Feel free to reach out, if any questions!
 
 [!["Buy Me A Coffee"](https://www.buymeacoffee.com/assets/img/custom_images/orange_img.png)](https://https://buymeacoffee.com/dompolizzi)
