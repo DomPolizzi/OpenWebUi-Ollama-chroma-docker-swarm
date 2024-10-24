@@ -7,7 +7,7 @@ services:
         - chromadb
         - ollama
     volumes:
-      - data/open-webui:/app/backend/data
+      - ./data/open-webui:/app/backend/data
     environment:
       DATA_DIR: /app/backend/data # Absolute path inside the container
       OLLAMA_BASE_URLS: http://ollama:11434
@@ -38,7 +38,7 @@ services:
     hostname: chromadb
     image: chromadb/chroma:0.5.15
     volumes:
-      - data/chromadb:/chroma/chroma
+      - ./data/chromadb:/chroma/chroma
     environment:
       - IS_PERSISTENT=TRUE
       - ALLOW_RESET=TRUE
@@ -76,5 +76,5 @@ services:
                 kind: "NVIDIA-GPU"
                 value: 1
     volumes:
-      - data/ollama:/root/.ollama
+      - ./data/ollama:/root/.ollama
 
