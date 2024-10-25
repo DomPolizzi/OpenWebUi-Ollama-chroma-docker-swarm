@@ -74,7 +74,19 @@ services:
           generic_resources:
             - discrete_resource_spec:
                 kind: "NVIDIA-GPU"
-                value: 1
+                value: 0
+      replicas: 1
+      restart_policy:
+        condition: any
+        delay: 5s
+        max_attempts: 3
     volumes:
       - ./data/ollama:/root/.ollama
 
+volumes:
+  open-webui-data:
+    external: true
+  chromadb-data:
+    external: true
+  ollama-data:
+    external: true

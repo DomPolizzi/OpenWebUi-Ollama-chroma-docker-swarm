@@ -11,14 +11,29 @@ docker stack deploy -c docker-stack.yml -d super-awesome-ai
 
 ```
 
-## Special Heads up:
-If using as is, you will need to do the following:
+### Installing Open WebUI with Ollama, and ChromaDB to a Docker Swarm
 
-1. Enable Docker GPU support in order to utilize the Ollama container as is. To do this, see [Nvidia Container Toolkit](https://docs.nvidia.com/datacenter/cloud-native/container-toolkit/latest/install-guide.html " on Nvidia's site.") 
+This installation method utilizes a stack file to deploy 3 seperate containers as services in a Docker Swarm. It includes Chroma, Ollama, and of course OpenWebUI for a streamlined setup via a single command. Along with this, there are pre-filled `Environment` variables based on popular  deployment choices. Choose the appropriate command based on your hardware setup:
 
-2. You need to ensure CUDA is Enabled, follow your OS and GPU instructions for that.
 
-Otherwise, you should follow OpenWebUI's guide [here and use it with a CPU instead of GPU](https://docs.openwebui.com/getting-started/#installing-open-webui-with-bundled-ollama-support )
+- **With GPU Support**:
+  Utilize the `docker-stack.yaml` file as is
+  
+  ```bash
+  docker stack deploy -c docker-stack.yaml -d super-awesome-ai
+  ```
+
+- **With CPU Support**:
+  Modify the `docker-stack.yaml` file and remove the following lines `70-76`, then deploy with the above snippet
+
+- **Additionally**:
+  1. Enable Docker GPU support to utilize the Ollama container as is. To do this, see [Nvidia Container Toolkit](https://docs.nvidia.com/datacenter/cloud-native/container-toolkit/latest/install-guide.html " on Nvidia's site.") 
+
+  2. You need to ensure CUDA is Enabled, follow your OS and GPU instructions for that.
+
+  3. Add: `"NVIDIA-GPU=GPU-<YOUR_GPU_NUMBER>"` in the file `/etc/docker/daemon.json`, follow the [Guide here on configuring Docker Swarm to with with your GPU](https://gist.github.com/tomlankhorst/33da3c4b9edbde5c83fc1244f010815c#configuring-docker-to-work-with-your-gpus)
+
+  4. You need to ensure GPU Resource is enabled in the Docker `config.toml`. You can enable GPU resource advertising by uncommenting the `swarm-resource = "DOCKER_RESOURCE_GPU"` line (line 2) in `/etc/nvidia-container-runtime/config.toml` . The docker daemon must be restarted after updating these files by running `sudo service docker restart` on each node. (May require entire restart)
 
 
 
