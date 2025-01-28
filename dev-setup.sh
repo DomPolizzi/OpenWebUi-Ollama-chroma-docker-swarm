@@ -7,7 +7,7 @@ mkdir -p data/open-webui data/chromadb data/ollama
 echo " "
 echo "Creating Docker Network . . ."
 echo " "
-docker network create internal-net || true
+docker network create -d overlay internal-net
 echo " "
 echo "Deploying Docker Services . . ."
 echo " "
