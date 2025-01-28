@@ -29,6 +29,8 @@ services:
         condition: any
         delay: 5s
         max_attempts: 3
+    networks:
+      - internal-net
 
   chromadb:
     hostname: chromadb
@@ -56,6 +58,8 @@ services:
       retries: 2
       start_period: 5s
       timeout: 10s
+    networks:
+      - internal-net
 
   ollama:
     image: ollama/ollama:latest
@@ -78,6 +82,8 @@ services:
         max_attempts: 3
     volumes:
       - ./data/ollama:/root/.ollama
+    networks:
+      - internal-net
 
 volumes:
   open-webui-data:
@@ -86,3 +92,9 @@ volumes:
     external: true
   ollama-data:
     external: true
+
+networks:
+  internal-net:
+    name: internal-net
+    external: true
+    driver: overlay
