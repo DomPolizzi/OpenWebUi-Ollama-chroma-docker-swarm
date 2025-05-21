@@ -33,7 +33,9 @@ This installation method utilizes a stack file to deploy 3 seperate containers a
 
   3. Add: `"NVIDIA-GPU=GPU-<YOUR_GPU_NUMBER>"` in the file `/etc/docker/daemon.json`, follow the [Guide here on configuring Docker Swarm to with with your GPU](https://gist.github.com/tomlankhorst/33da3c4b9edbde5c83fc1244f010815c#configuring-docker-to-work-with-your-gpus)
 
-  4. You need to ensure GPU Resource is enabled in the Docker `config.toml`. You can enable GPU resource advertising by uncommenting the `swarm-resource = "DOCKER_RESOURCE_GPU"` line (line 2) in `/etc/nvidia-container-runtime/config.toml` . The docker daemon must be restarted after updating these files by running `sudo service docker restart` on each node. (May require entire restart)
+  4. Ensure GPU Resource is enabled in the Docker `/etc/nvidia-container-runtime/config.toml`. You can enable GPU resource advertising by uncommenting the `swarm-resource = "DOCKER_RESOURCE_GPU"` line (line 2) in `/etc/nvidia-container-runtime/config.toml` . The docker daemon must be restarted after updating these files by running `sudo service docker restart` on each node. (May require entire restart)
+
+  5. Change `no-cgroups =true` to `no-cgroups =false` in `/etc/nvidia-container-runtime/config.toml` 
 
 
 
